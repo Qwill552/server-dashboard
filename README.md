@@ -1,0 +1,2 @@
+# server-dashboard
+просто дашборд
