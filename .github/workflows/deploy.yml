@@ -25,7 +25,6 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: test
     runs-on: ubuntu-latest
-    environment: production
     concurrency:
       group: production-deploy
       cancel-in-progress: false

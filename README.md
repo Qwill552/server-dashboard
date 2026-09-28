@@ -41,13 +41,13 @@ sudo -u dashboard-deploy nano /home/dashboard-deploy/.ssh/authorized_keys
 
 ### 3. Задать адрес и секреты в GitHub
 
-В репозитории откройте `Settings → Environments → production`. Для окружения разрешите деплой только из ветки `main`. Создайте:
+В репозитории откройте `Settings → Secrets and variables → Actions`. На вкладках **Secrets** и **Variables** создайте:
 
 | Тип | Имя | Значение |
 | --- | --- | --- |
-| Environment variable | `DEPLOY_HOST` | `qwill-dashboard.mooo.com` |
-| Environment secret | `DEPLOY_SSH_KEY` | Полное содержимое приватного файла `dashboard_deploy` с вашего компьютера |
-| Environment secret | `DEPLOY_KNOWN_HOSTS` | Проверенный публичный SSH host key VPS в формате ниже |
+| Repository variable | `DEPLOY_HOST` | `qwill-dashboard.mooo.com` |
+| Repository secret | `DEPLOY_SSH_KEY` | Полное содержимое приватного файла `dashboard_deploy` с вашего компьютера |
+| Repository secret | `DEPLOY_KNOWN_HOSTS` | Проверенный публичный SSH host key VPS в формате ниже |
 
 Чтобы получить host key из **уже доверенного SSH-сеанса** на VPS, выполните:
 
