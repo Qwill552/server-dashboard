@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1018">
+  <title>Qwill · Server dashboard</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/app.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <svg class="svg-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="3" width="7" height="7" rx="1.4"/><rect x="3" y="14" width="7" height="7" rx="1.4"/><rect x="14" y="14" width="7" height="7" rx="1.4"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M9 1v4m6-4v4M9 19v4m6-4v4M1 9h4m-4 6h4m14-6h4m-4 6h4"/></symbol>
+    <symbol id="i-memory" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 7V4m5 3V4m5 3V4M7 17v3m5-3v3m5-3v3M7 11h2m3 0h2m3 0h1"/></symbol>
+    <symbol id="i-disk" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 14h18M7 17h.01M11 17h.01"/></symbol>
+    <symbol id="i-network" viewBox="0 0 24 24"><path d="M7 17V4m0 0L3 8m4-4 4 4M17 7v13m0 0 4-4m-4 4-4-4"/></symbol>
+    <symbol id="i-activity" viewBox="0 0 24 24"><path d="M2 12h4l3-7 5 14 3-7h5"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 8.7 8 11 4.6-2.3 8-6 8-11V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-thermo" viewBox="0 0 24 24"><path d="M9 14.5V5a3 3 0 1 1 6 0v9.5a5 5 0 1 1-6 0Z"/><path d="M12 10v8"/></symbol>
+  </svg>
+
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="/" aria-label="Qwill Dashboard">
+        <span class="brand-mark"><span></span><span></span><span></span><span></span></span>
+        <span class="brand-name">qwill<span class="brand-dot">.</span><small>DASHBOARD</small></span>
+      </a>
+
+      <div class="sidebar-section-label">WORKSPACE</div>
+      <nav aria-label="Основная навигация">
+        <a class="nav-item active" href="#overview"><svg><use href="#i-grid"/></svg><span>Обзор</span><span class="nav-active-dot"></span></a>
+        <a class="nav-item" href="#performance"><svg><use href="#i-activity"/></svg><span>Производительность</span></a>
+        <a class="nav-item" href="#services"><svg><use href="#i-shield"/></svg><span>Сервисы</span></a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-server">
+          <span id="sidebar-status" class="status-light"></span>
+          <div><strong>Dubai VPS</strong><span id="sidebar-host">Подключение…</span></div>
+        </div>
+        <p>Обновление каждые 3 секунды</p>
+      </div>
+    </aside>
+
+    <main class="main" id="overview">
+      <header class="topbar">
+        <div class="breadcrumbs">Инфраструктура <span>/</span> <strong>Обзор сервера</strong></div>
+        <div class="topbar-right"><span class="live-pulse"></span><span id="connection-text">Подключение</span><span class="topbar-divider"></span><span id="current-time">—</span></div>
+      </header>
+
+      <div class="content">
+        <div class="page-heading">
+          <div><div class="eyebrow">СЕРВЕР · DUBAI</div><h1>Обзор системы<span class="heading-period">.</span></h1><p>Состояние и ресурсы в реальном времени</p></div>
+          <div id="overall-badge" class="overall-badge"><span class="status-light"></span><span>Подключение…</span></div>
+        </div>
+
+        <section class="hero" aria-label="Информация о сервере">
+          <div class="hero-text">
+            <div class="hero-kicker"><span class="hero-kicker-dot"></span> ВАШ СЕРВЕР</div>
+            <h2>Всё под контролем<span>.</span></h2>
+            <p>Ключевые показатели вашего VPS собраны в одном месте.</p>
+            <div class="hero-meta"><span><svg><use href="#i-clock"/></svg> Работает <strong id="hero-uptime">—</strong></span><span><svg><use href="#i-cpu"/></svg> <strong id="hero-cores">—</strong> vCPU</span></div>
+          </div>
+          <div class="hero-visual" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div><div class="server-icon"><span></span><span></span><span></span></div></div>
+        </section>
+
+        <section class="section" id="performance">
+          <div class="section-heading"><div><span class="section-index">01 / МЕТРИКИ</span><h2>Ресурсы системы</h2></div><span class="section-note">Текущие показатели</span></div>
+          <div class="metric-grid">
+            <article class="metric-card accent-cpu"><div class="metric-top"><span class="metric-icon"><svg><use href="#i-cpu"/></svg></span><span class="metric-title">Процессор</span><span class="metric-tag">CPU</span></div><div class="metric-reading"><strong id="cpu-value">—</strong><span>%</span></div><div class="metric-foot"><div class="progress"><span id="cpu-progress"></span></div><span id="cpu-sub">Загрузка процессора</span></div></article>
+            <article class="metric-card accent-memory"><div class="metric-top"><span class="metric-icon"><svg><use href="#i-memory"/></svg></span><span class="metric-title">Память</span><span class="metric-tag">RAM</span></div><div class="metric-reading"><strong id="memory-value">—</strong><span>%</span></div><div class="metric-foot"><div class="progress"><span id="memory-progress"></span></div><span id="memory-sub">—</span></div></article>
+            <article class="metric-card accent-disk"><div class="metric-top"><span class="metric-icon"><svg><use href="#i-disk"/></svg></span><span class="metric-title">Диск</span><span class="metric-tag">STORAGE</span></div><div class="metric-reading"><strong id="disk-value">—</strong><span>%</span></div><div class="metric-foot"><div class="progress"><span id="disk-progress"></span></div><span id="disk-sub">—</span></div></article>
+            <article class="metric-card accent-temp"><div class="metric-top"><span class="metric-icon"><svg><use href="#i-thermo"/></svg></span><span class="metric-title">Температура</span><span class="metric-tag">SENSOR</span></div><div class="metric-reading"><strong id="temp-value">—</strong><span id="temp-unit">°C</span></div><div class="metric-foot"><div class="progress"><span id="temp-progress"></span></div><span id="temp-sub">Датчик CPU</span></div></article>
+          </div>
+        </section>
+
+        <section class="chart-grid" aria-label="Графики нагрузки">
+          <article class="panel chart-panel"><div class="panel-header"><div><span class="panel-kicker">НАГРУЗКА</span><h3>CPU и память</h3></div><span class="panel-caption">Последние 12 минут</span></div><div class="chart-wrap"><div class="chart-labels"><span>100%</span><span>50%</span><span>0%</span></div><svg class="line-chart" id="usage-chart" viewBox="0 0 600 180" preserveAspectRatio="none" role="img" aria-label="График загрузки процессора и памяти"><path class="chart-grid-line" d="M0 1 H600 M0 90 H600 M0 179 H600"/><path id="cpu-area" class="chart-area-cpu"/><path id="cpu-line" class="chart-line-cpu"/><path id="memory-line" class="chart-line-memory"/></svg></div><div class="legend"><span><i class="legend-dot cpu-dot"></i>Процессор</span><span><i class="legend-dot memory-dot"></i>Память</span></div></article>
+          <article class="panel chart-panel"><div class="panel-header"><div><span class="panel-kicker">ТРАФИК</span><h3>Сеть</h3></div><span class="panel-caption">Скорость передачи</span></div><div class="network-summary"><div><span class="network-direction down">↓</span><span>Входящий</span><strong id="network-in">—</strong></div><div><span class="network-direction up">↑</span><span>Исходящий</span><strong id="network-out">—</strong></div></div><div class="network-chart-wrap"><svg class="line-chart" id="network-chart" viewBox="0 0 600 120" preserveAspectRatio="none" role="img" aria-label="График сетевого трафика"><path class="chart-grid-line" d="M0 1 H600 M0 60 H600 M0 119 H600"/><path id="network-in-line" class="chart-line-cpu"/><path id="network-out-line" class="chart-line-network"/></svg></div><div class="legend"><span><i class="legend-dot cpu-dot"></i>Входящий</span><span><i class="legend-dot network-dot"></i>Исходящий</span></div></article>
+        </section>
+
+        <section class="section services-section" id="services"><div class="section-heading"><div><span class="section-index">02 / СИСТЕМА</span><h2>Сервисы и детали</h2></div></div><div class="detail-grid"><article class="panel service-panel"><div class="panel-header"><div><span class="panel-kicker">ВЕБ-СЕРВЕР</span><h3>Caddy</h3></div><span id="caddy-badge" class="service-badge unknown"><span></span>Проверка</span></div><p id="caddy-detail">Получаем состояние службы…</p><div class="service-bottom"><span>HTTPS · Reverse proxy</span><span>127.0.0.1:5100</span></div></article><article class="panel facts-panel"><div class="panel-header"><div><span class="panel-kicker">ИНФОРМАЦИЯ</span><h3>О сервере</h3></div></div><dl><div><dt>Имя хоста</dt><dd id="fact-host">—</dd></div><div><dt>Система</dt><dd id="fact-platform">—</dd></div><div><dt>Частота CPU</dt><dd id="fact-frequency">—</dd></div><div><dt>Load average</dt><dd id="fact-load">—</dd></div><div><dt>Диск · чтение / запись</dt><dd id="fact-disk-io">—</dd></div></dl></article></div></section>
+
+        <footer class="footer"><span>QWILL / SERVER DASHBOARD</span><span id="last-update">Ожидание данных</span></footer>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

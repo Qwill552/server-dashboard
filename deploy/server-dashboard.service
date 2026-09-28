@@ -1,0 +1,28 @@
+[Unit]
+Description=Qwill server dashboard
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=dashboard-app
+Group=dashboard-app
+WorkingDirectory=/opt/server-dashboard/current
+ExecStart=/opt/server-dashboard/current/.venv/bin/python -m dashboard
+Environment=PYTHONUNBUFFERED=1
+Environment=DASHBOARD_PORT=5100
+Environment=CADDY_SERVICE_NAME=caddy.service
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+
+[Install]
+WantedBy=multi-user.target
