@@ -1,10 +1,18 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ru" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f5f8f6">
+  <meta name="theme-color" content="#0b1018">
   <title>Qwill · Server dashboard</title>
+  <script>
+    try {
+      if (localStorage.getItem("dashboard-theme") === "light") {
+        document.documentElement.dataset.theme = "light";
+        document.querySelector('meta[name="theme-color"]').content = "#ffffff";
+      }
+    } catch (_) {}
+  </script>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/app.css">
   <script src="/app.js" defer></script>
@@ -20,6 +28,8 @@
     <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 8.7 8 11 4.6-2.3 8-6 8-11V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
     <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
     <symbol id="i-thermo" viewBox="0 0 24 24"><path d="M9 14.5V5a3 3 0 1 1 6 0v9.5a5 5 0 1 1-6 0Z"/><path d="M12 10v8"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.4 15.1A8.5 8.5 0 0 1 8.9 3.6 8.5 8.5 0 1 0 20.4 15.1Z"/></symbol>
   </svg>
 
   <div class="app-shell">
@@ -86,5 +96,9 @@
       </div>
     </main>
   </div>
+  <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Включить светлую тему" title="Включить светлую тему">
+    <svg class="icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+    <svg class="icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+  </button>
 </body>
 </html>
