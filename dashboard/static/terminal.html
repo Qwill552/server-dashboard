@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1018">
+  <title>Qwill · Terminal</title>
+  <script src="/theme.js"></script>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/app.css">
+  <link rel="stylesheet" href="/console.css">
+  <link rel="stylesheet" href="/manage.css">
+  <script src="/console.js" defer></script>
+</head>
+<body>
+  <svg class="svg-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="3" width="7" height="7" rx="1.4"/><rect x="3" y="14" width="7" height="7" rx="1.4"/><rect x="14" y="14" width="7" height="7" rx="1.4"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M9 1v4m6-4v4M9 19v4m6-4v4M1 9h4m-4 6h4m14-6h4m-4 6h4"/></symbol>
+    <symbol id="i-memory" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 7V4m5 3V4m5 3V4M7 17v3m5-3v3m5-3v3M7 11h2m3 0h2m3 0h1"/></symbol>
+    <symbol id="i-disk" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 14h18M7 17h.01M11 17h.01"/></symbol>
+    <symbol id="i-network" viewBox="0 0 24 24"><path d="M7 17V4m0 0L3 8m4-4 4 4M17 7v13m0 0 4-4m-4 4-4-4"/></symbol>
+    <symbol id="i-activity" viewBox="0 0 24 24"><path d="M2 12h4l3-7 5 14 3-7h5"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 8.7 8 11 4.6-2.3 8-6 8-11V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-thermo" viewBox="0 0 24 24"><path d="M9 14.5V5a3 3 0 1 1 6 0v9.5a5 5 0 1 1-6 0Z"/><path d="M12 10v8"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.4 15.1A8.5 8.5 0 0 1 8.9 3.6 8.5 8.5 0 1 0 20.4 15.1Z"/></symbol>
+    <symbol id="i-terminal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3m6 0h4"/></symbol>
+  </svg>
+
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="/" aria-label="Qwill Dashboard">
+        <span class="brand-mark"><span></span><span></span><span></span><span></span></span>
+        <span class="brand-name">qwill<span class="brand-dot">.</span><small>DASHBOARD</small></span>
+      </a>
+
+      <div class="sidebar-section-label">WORKSPACE</div>
+      <nav aria-label="Основная навигация">
+        <a class="nav-item" href="/"><svg><use href="#i-grid"/></svg><span>Обзор</span></a>
+        <a class="nav-item active" href="/terminal" aria-current="page"><svg><use href="#i-terminal"/></svg><span>Терминал</span><span class="nav-active-dot"></span></a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-server"><span class="status-light"></span><div><strong>Dubai VPS</strong><span>WEB CONSOLE</span></div></div>
+      </div>
+    </aside>
+
+    <main class="main terminal-page">
+      <header class="topbar">
+        <div class="breadcrumbs">WORKSPACE <span>/</span> <strong>Терминал</strong></div>
+        <div class="topbar-right"><span class="live-pulse"></span><span>WEB CONSOLE</span></div>
+      </header>
+      <div class="content">
+        <section class="section management-section" id="management">
+          <div class="section-heading"><div><span class="section-index">01 / УПРАВЛЕНИЕ</span><h2>Рабочее пространство</h2></div><span id="console-status" class="section-note">Проверка подключения…</span></div>
+          <div class="panel management-panel">
+            <div class="management-tabs" role="tablist" aria-label="Инструменты сервера">
+              <button class="management-tab active" data-panel="terminal" type="button" role="tab" aria-selected="true">Терминал</button>
+              <button class="management-tab" data-panel="files" type="button" role="tab" aria-selected="false">Файлы</button>
+              <button class="management-tab" data-panel="macros" type="button" role="tab" aria-selected="false">Макросы</button>
+            </div>
+
+            <div id="terminal-panel" class="management-body" role="tabpanel">
+              <div class="management-toolbar"><span id="terminal-status">Подключение…</span><button id="terminal-reconnect" class="secondary-button" type="button">Переподключить</button></div>
+              <div id="terminal-screen" aria-label="Терминал сервера"></div>
+              <form id="command-form" class="command-form"><span aria-hidden="true">›</span><input id="command-input" autocomplete="off" spellcheck="false" placeholder="Команда или /макрос" aria-label="Команда или макрос"><button type="submit">Выполнить</button></form>
+              <pre id="command-output" class="command-output" hidden></pre>
+            </div>
+
+            <div id="files-panel" class="management-body" role="tabpanel" hidden>
+              <div class="file-layout">
+                <div class="file-sidebar">
+                  <form id="file-path-form" class="path-form"><input id="file-path" aria-label="Путь к каталогу" spellcheck="false" value="/etc"><button type="submit" title="Открыть каталог">↵</button></form>
+                  <div class="file-actions"><button id="file-parent" class="secondary-button" type="button">↑ Выше</button><button id="file-new" class="secondary-button" type="button">+ Файл</button></div>
+                  <div id="file-list" class="file-list" aria-label="Файлы каталога"></div>
+                </div>
+                <div class="editor-pane">
+                  <div id="editor-tabs" class="editor-tabs" aria-label="Открытые файлы"></div>
+                  <div class="editor-toolbar"><span id="editor-path">Выберите файл слева</span><div><button id="file-reload" class="secondary-button" type="button" disabled>Обновить</button><button id="file-save" type="button" disabled>Сохранить</button></div></div>
+                  <div id="editor-container" class="editor-container"></div>
+                  <div class="backup-bar"><label for="backup-list">Копии</label><select id="backup-list" disabled><option>Нет открытого файла</option></select><button id="backup-open" class="secondary-button" type="button" disabled>Загрузить копию</button></div>
+                </div>
+              </div>
+              <p id="file-status" class="management-message" role="status"></p>
+            </div>
+
+            <div id="macros-panel" class="management-body" role="tabpanel" hidden>
+              <div class="macro-layout">
+                <div class="macro-sidebar"><div class="macro-heading"><strong>Ваши команды</strong><button id="macro-new" class="secondary-button" type="button">+ Новый</button></div><div id="macro-list" class="macro-list"></div></div>
+                <form id="macro-form" class="macro-form">
+                  <div class="macro-form-grid"><label>Имя после /<input id="macro-name" required pattern="[a-z][a-z0-9_-]{0,31}" placeholder="flush" spellcheck="false"></label><label>Описание<input id="macro-label" placeholder="Что делает макрос"></label></div>
+                  <label>Команды Bash<textarea id="macro-command" rows="5" spellcheck="false" placeholder="sudo systemctl restart caddy"></textarea></label>
+                  <label>Исполняемый файл <span>(необязательно)</span><input id="macro-file" spellcheck="false" placeholder="/usr/local/bin/my-script"></label>
+                  <label>Открыть адрес после успеха <span>(необязательно)</span><input id="macro-url" type="url" placeholder="https://example.com"></label>
+                  <div class="macro-actions"><button type="submit">Сохранить</button><button id="macro-run" class="secondary-button" type="button">Запустить</button><button id="macro-delete" class="danger-button" type="button">Удалить</button></div>
+                  <p id="macro-status" class="management-message" role="status"></p>
+                  <pre id="macro-output" class="command-output" hidden></pre>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <footer class="footer"><span>QWILL / SERVER DASHBOARD</span><span>WEB CONSOLE</span></footer>
+      </div>
+    </main>
+  </div>
+  <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Включить светлую тему" title="Включить светлую тему">
+    <svg class="icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+    <svg class="icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+  </button>
+</body>
+</html>

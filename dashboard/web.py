@@ -19,7 +19,7 @@ from .terminal import serve_terminal
 
 
 STATIC_DIR = Path(__file__).resolve().parent / "static"
-STATIC_FILES = {"app.css", "app.js", "console.css", "console.js", "manage.css", "favicon.svg"}
+STATIC_FILES = {"app.css", "app.js", "console.css", "console.js", "manage.css", "theme.js", "favicon.svg"}
 
 
 class FileUpdate(BaseModel):
@@ -136,6 +136,10 @@ def create_app(sampler: MetricsSampler, state_dir: Path | None = None) -> FastAP
     @app.get("/index.html")
     def index() -> FileResponse:
         return FileResponse(STATIC_DIR / "index.html", headers={"Cache-Control": "no-store"})
+
+    @app.get("/terminal")
+    def terminal_page() -> FileResponse:
+        return FileResponse(STATIC_DIR / "terminal.html", headers={"Cache-Control": "no-store"})
 
     @app.get("/{filename}")
     def static_file(filename: str) -> FileResponse:

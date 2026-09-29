@@ -120,21 +120,6 @@ async function refresh() {
 
 function updateClock() { setText("current-time", new Date().toLocaleTimeString("ru-RU", { hour: "2-digit", minute: "2-digit" })); }
 
-function setTheme(theme) {
-  const light = theme === "light";
-  document.documentElement.dataset.theme = light ? "light" : "dark";
-  document.querySelector('meta[name="theme-color"]').content = light ? "#ffffff" : "#0b1018";
-  const label = light ? "Включить тёмную тему" : "Включить светлую тему";
-  const toggle = $("theme-toggle");
-  toggle.setAttribute("aria-label", label);
-  toggle.title = label;
-  try { localStorage.setItem("dashboard-theme", light ? "light" : "dark"); } catch (_) {}
-}
-
-$("theme-toggle").addEventListener("click", () => {
-  setTheme(document.documentElement.dataset.theme === "light" ? "dark" : "light");
-});
-setTheme(document.documentElement.dataset.theme);
 updateClock();
 window.setInterval(updateClock, 30000);
 refresh();
