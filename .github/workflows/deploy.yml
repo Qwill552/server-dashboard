@@ -20,6 +20,15 @@ jobs:
           .venv/bin/python -m pip install --disable-pip-version-check -r requirements.txt
       - name: Run tests
         run: .venv/bin/python -m unittest discover -s tests -v
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Verify frontend bundle
+        run: |
+          npm ci
+          npm run build
+          git diff --exit-code -- dashboard/static/console.js dashboard/static/console.css
 
   deploy:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -52,6 +61,6 @@ jobs:
           ssh_options="-i $HOME/.ssh/dashboard_deploy -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts"
           ssh $ssh_options "$target" "mkdir -p /opt/server-dashboard/releases/$GITHUB_SHA"
           rsync -az --delete \
-            --exclude='.git/' --exclude='.venv/' --exclude='__pycache__/' \
+            --exclude='.git/' --exclude='.venv/' --exclude='node_modules/' --exclude='__pycache__/' \
             -e "ssh $ssh_options" ./ "$target:/opt/server-dashboard/releases/$GITHUB_SHA/"
           ssh $ssh_options "$target" "bash /opt/server-dashboard/releases/$GITHUB_SHA/scripts/activate-release.sh $GITHUB_SHA"

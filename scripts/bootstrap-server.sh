@@ -22,6 +22,7 @@ fi
 
 install -d -m 0755 -o dashboard-deploy -g dashboard-deploy /opt/server-dashboard
 install -d -m 0755 -o dashboard-deploy -g dashboard-deploy /opt/server-dashboard/releases
+install -d -m 0700 -o root -g root /var/lib/server-dashboard
 install -d -m 0700 -o dashboard-deploy -g dashboard-deploy /home/dashboard-deploy/.ssh
 touch /home/dashboard-deploy/.ssh/authorized_keys
 chown dashboard-deploy:dashboard-deploy /home/dashboard-deploy/.ssh/authorized_keys

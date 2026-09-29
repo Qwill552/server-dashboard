@@ -15,7 +15,10 @@
   </script>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/app.css">
+  <link rel="stylesheet" href="/console.css">
+  <link rel="stylesheet" href="/manage.css">
   <script src="/app.js" defer></script>
+  <script src="/console.js" defer></script>
 </head>
 <body>
   <svg class="svg-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
@@ -91,6 +94,56 @@
         </section>
 
         <section class="section services-section" id="services"><div class="section-heading"><div><span class="section-index">02 / СИСТЕМА</span><h2>Сервисы и детали</h2></div></div><div class="detail-grid"><article class="panel service-panel"><div class="panel-header"><div><span class="panel-kicker">ВЕБ-СЕРВЕР</span><h3>Caddy</h3></div><span id="caddy-badge" class="service-badge unknown"><span></span>Проверка</span></div><p id="caddy-detail">Получаем состояние службы…</p><div class="service-bottom"><span>HTTPS · Reverse proxy</span><span>127.0.0.1:5100</span></div></article><article class="panel facts-panel"><div class="panel-header"><div><span class="panel-kicker">ИНФОРМАЦИЯ</span><h3>О сервере</h3></div></div><dl><div><dt>Имя хоста</dt><dd id="fact-host">—</dd></div><div><dt>Система</dt><dd id="fact-platform">—</dd></div><div><dt>Частота CPU</dt><dd id="fact-frequency">—</dd></div><div><dt>Load average</dt><dd id="fact-load">—</dd></div><div><dt>Диск · чтение / запись</dt><dd id="fact-disk-io">—</dd></div></dl></article></div></section>
+
+        <section class="section management-section" id="management">
+          <div class="section-heading"><div><span class="section-index">03 / УПРАВЛЕНИЕ</span><h2>Рабочее пространство</h2></div><span id="console-status" class="section-note">Проверка подключения…</span></div>
+          <div class="panel management-panel">
+            <div class="management-tabs" role="tablist" aria-label="Инструменты сервера">
+              <button class="management-tab active" data-panel="terminal" type="button" role="tab" aria-selected="true">Терминал</button>
+              <button class="management-tab" data-panel="files" type="button" role="tab" aria-selected="false">Файлы</button>
+              <button class="management-tab" data-panel="macros" type="button" role="tab" aria-selected="false">Макросы</button>
+            </div>
+
+            <div id="terminal-panel" class="management-body" role="tabpanel">
+              <div class="management-toolbar"><span id="terminal-status">Подключение…</span><button id="terminal-reconnect" class="secondary-button" type="button">Переподключить</button></div>
+              <div id="terminal-screen" aria-label="Терминал сервера"></div>
+              <form id="command-form" class="command-form"><span aria-hidden="true">›</span><input id="command-input" autocomplete="off" spellcheck="false" placeholder="Команда или /макрос" aria-label="Команда или макрос"><button type="submit">Выполнить</button></form>
+              <pre id="command-output" class="command-output" hidden></pre>
+            </div>
+
+            <div id="files-panel" class="management-body" role="tabpanel" hidden>
+              <div class="file-layout">
+                <div class="file-sidebar">
+                  <form id="file-path-form" class="path-form"><input id="file-path" aria-label="Путь к каталогу" spellcheck="false" value="/etc"><button type="submit" title="Открыть каталог">↵</button></form>
+                  <div class="file-actions"><button id="file-parent" class="secondary-button" type="button">↑ Выше</button><button id="file-new" class="secondary-button" type="button">+ Файл</button></div>
+                  <div id="file-list" class="file-list" aria-label="Файлы каталога"></div>
+                </div>
+                <div class="editor-pane">
+                  <div id="editor-tabs" class="editor-tabs" aria-label="Открытые файлы"></div>
+                  <div class="editor-toolbar"><span id="editor-path">Выберите файл слева</span><div><button id="file-reload" class="secondary-button" type="button" disabled>Обновить</button><button id="file-save" type="button" disabled>Сохранить</button></div></div>
+                  <div id="editor-container" class="editor-container"></div>
+                  <div class="backup-bar"><label for="backup-list">Копии</label><select id="backup-list" disabled><option>Нет открытого файла</option></select><button id="backup-open" class="secondary-button" type="button" disabled>Загрузить копию</button></div>
+                </div>
+              </div>
+              <p id="file-status" class="management-message" role="status"></p>
+            </div>
+
+            <div id="macros-panel" class="management-body" role="tabpanel" hidden>
+              <div class="macro-layout">
+                <div class="macro-sidebar"><div class="macro-heading"><strong>Ваши команды</strong><button id="macro-new" class="secondary-button" type="button">+ Новый</button></div><div id="macro-list" class="macro-list"></div></div>
+                <form id="macro-form" class="macro-form">
+                  <div class="macro-form-grid"><label>Имя после /<input id="macro-name" required pattern="[a-z][a-z0-9_-]{0,31}" placeholder="flush" spellcheck="false"></label><label>Описание<input id="macro-label" placeholder="Что делает макрос"></label></div>
+                  <label>Команды Bash<textarea id="macro-command" rows="5" spellcheck="false" placeholder="sudo systemctl restart caddy"></textarea></label>
+                  <label>Исполняемый файл <span>(необязательно)</span><input id="macro-file" spellcheck="false" placeholder="/usr/local/bin/my-script"></label>
+                  <label>Открыть адрес после успеха <span>(необязательно)</span><input id="macro-url" type="url" placeholder="https://example.com"></label>
+                  <div class="macro-actions"><button type="submit">Сохранить</button><button id="macro-run" class="secondary-button" type="button">Запустить</button><button id="macro-delete" class="danger-button" type="button">Удалить</button></div>
+                  <p id="macro-status" class="management-message" role="status"></p>
+                  <pre id="macro-output" class="command-output" hidden></pre>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <footer class="footer"><span>QWILL / SERVER DASHBOARD</span><span id="last-update">Ожидание данных</span></footer>
       </div>

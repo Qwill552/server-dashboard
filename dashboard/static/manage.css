@@ -1,0 +1,75 @@
+:root{--manage-bg:#101922;--manage-control:#0d151d;--manage-border:#293744;--manage-hover:#1b2a32;--manage-input:#eaf1f4;--manage-terminal:#0b1018;--manage-editor:#101922}
+:root[data-theme="light"]{--manage-bg:#ffffff;--manage-control:#f7faf8;--manage-border:#dce8e2;--manage-hover:#eaf4ed;--manage-input:#1d312b;--manage-terminal:#f8fbf9;--manage-editor:#ffffff}
+.management-section{margin-top:40px}
+.management-panel{overflow:hidden}
+.management-tabs{display:flex;align-items:center;gap:6px;padding:12px 16px;border-bottom:1px solid var(--manage-border);background:var(--manage-bg)}
+.management-panel button{font:inherit;cursor:pointer;border:1px solid transparent;border-radius:8px;background:transparent;color:var(--muted);transition:background .15s,color .15s,border-color .15s}
+.management-panel button:hover{background:var(--manage-hover);color:var(--text)}
+.management-panel button:focus-visible,.management-panel input:focus-visible,.management-panel textarea:focus-visible,.management-panel select:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.management-panel button:disabled{opacity:.45;cursor:not-allowed}
+.management-tab{padding:10px 17px;font-size:12px;font-weight:700}
+.management-tab.active{background:var(--manage-hover);color:var(--green);border-color:var(--manage-border)}
+.management-body{min-width:0}
+.management-body[hidden]{display:none}
+.management-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 18px;border-bottom:1px solid var(--manage-border);color:var(--muted);font-size:11px}
+.management-panel .secondary-button{border-color:var(--manage-border);color:var(--soft);padding:7px 11px;font-size:11px;font-weight:650}
+.management-panel .secondary-button:hover{border-color:var(--green);color:var(--green)}
+.management-panel .danger-button{border-color:var(--manage-border);color:var(--red);padding:9px 14px;font-size:11px;font-weight:700}
+.management-panel .danger-button:hover{background:#a52d2d20;border-color:var(--red);color:var(--red)}
+#terminal-screen{height:430px;min-width:0;padding:16px 14px;background:var(--manage-terminal)}
+#terminal-screen .xterm{height:100%}
+.command-form{display:flex;align-items:center;gap:10px;padding:13px 16px;border-top:1px solid var(--manage-border);background:var(--manage-bg)}
+.command-form>span{font-size:24px;color:var(--green);line-height:1}
+.management-panel input,.management-panel textarea,.management-panel select{min-width:0;border:1px solid var(--manage-border);border-radius:7px;background:var(--manage-control);color:var(--manage-input);font:inherit;font-size:12px}
+.management-panel input::placeholder,.management-panel textarea::placeholder{color:var(--muted);opacity:.7}
+.command-form input{flex:1;height:35px;padding:0 11px}
+.management-panel button[type="submit"],#file-save,#macro-run{background:var(--green);color:#0b1018;border-color:var(--green);padding:9px 15px;font-size:11px;font-weight:750}
+:root[data-theme="light"] .management-panel button[type="submit"],:root[data-theme="light"] #file-save,:root[data-theme="light"] #macro-run{color:#ffffff}
+.management-panel button[type="submit"]:hover,#file-save:hover,#macro-run:hover{filter:brightness(1.1);background:var(--green);color:#0b1018}
+.command-output{white-space:pre-wrap;overflow:auto;max-height:200px;margin:0;padding:14px 18px;border-top:1px solid var(--manage-border);background:var(--manage-control);color:var(--soft);font:11px/1.6 Consolas,"Cascadia Code",monospace}
+.file-layout{display:grid;grid-template-columns:250px minmax(0,1fr);min-height:570px}
+.file-sidebar{min-width:0;border-right:1px solid var(--manage-border);background:var(--manage-bg)}
+.path-form{display:flex;gap:4px;padding:12px;border-bottom:1px solid var(--manage-border)}
+.path-form input{flex:1;height:33px;padding:0 8px}
+.path-form button{min-width:32px;border-color:var(--manage-border);color:var(--green);font-size:17px}
+.file-actions{display:flex;gap:8px;padding:9px 12px;border-bottom:1px solid var(--manage-border)}
+.file-list{max-height:540px;overflow:auto;padding:7px}
+.file-list button{display:flex;align-items:center;gap:9px;width:100%;padding:8px 10px;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:11px}
+.file-list button span{flex:0 0 14px;color:var(--green)}
+.file-list button.selected{background:var(--manage-hover);color:var(--text)}
+.editor-pane{display:flex;flex-direction:column;min-width:0}
+.editor-tabs{display:flex;gap:3px;min-height:43px;padding:6px 8px 0;overflow-x:auto;border-bottom:1px solid var(--manage-border);background:var(--manage-bg)}
+.editor-tab{display:flex;align-items:center;flex:0 0 auto;max-width:230px;border:1px solid transparent;border-radius:7px 7px 0 0}
+.editor-tab.active{border-color:var(--manage-border);border-bottom-color:var(--manage-editor);background:var(--manage-editor)}
+.editor-tabs .editor-tab button{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:7px 10px;font-size:11px}
+.editor-tab.active button{color:var(--text)}
+.editor-tabs .editor-tab .editor-tab-close{padding:6px 9px;color:var(--muted)}
+.editor-toolbar{display:flex;align-items:center;justify-content:space-between;gap:15px;min-height:46px;padding:7px 13px;border-bottom:1px solid var(--manage-border);font-size:11px;color:var(--muted)}
+.editor-toolbar>span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.editor-toolbar>div{display:flex;gap:7px;flex-shrink:0}
+.editor-container{flex:1;min-height:420px;background:var(--manage-editor)}
+.editor-instance{height:100%;min-height:420px}
+.editor-instance[hidden]{display:none}
+.editor-instance .cm-editor{height:100%;min-height:420px;background:var(--manage-editor);color:var(--text);font-size:12px}
+.editor-instance .cm-gutters{background:var(--manage-control);border-right:1px solid var(--manage-border)}
+.backup-bar{display:flex;align-items:center;gap:9px;padding:9px 13px;border-top:1px solid var(--manage-border);color:var(--muted);font-size:11px}
+.backup-bar select{flex:1;max-width:260px;height:30px;padding:0 7px}
+.management-message{min-height:15px;margin:0;padding:0 14px 10px;color:var(--muted);font-size:11px}
+.macro-layout{display:grid;grid-template-columns:250px minmax(0,1fr);min-height:480px}
+.macro-sidebar{border-right:1px solid var(--manage-border);padding:16px 12px;background:var(--manage-bg)}
+.macro-heading{display:flex;justify-content:space-between;align-items:center;gap:6px;font-size:12px;margin-bottom:12px}
+.macro-list{display:grid;gap:5px}
+.macro-list button{display:grid;gap:3px;text-align:left;padding:10px;min-width:0;font-size:12px;color:var(--text)}
+.macro-list button.selected{background:var(--manage-hover);color:var(--green)}
+.macro-list button small{color:var(--muted);font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.macro-form{display:grid;align-content:start;gap:17px;padding:20px 22px;min-width:0}
+.macro-form-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:14px}
+.macro-form label{display:grid;gap:7px;color:var(--soft);font-size:11px;font-weight:650}
+.macro-form label span{font-weight:400;color:var(--muted)}
+.macro-form input{width:100%;height:36px;padding:0 10px}
+.macro-form textarea{width:100%;padding:10px;resize:vertical;line-height:1.5;font-family:Consolas,"Cascadia Code",monospace}
+.macro-actions{display:flex;gap:9px;flex-wrap:wrap}
+.macro-form .management-message{padding:0}
+.macro-form .command-output{border:1px solid var(--manage-border);border-radius:8px}
+@media(max-width:900px){.file-layout,.macro-layout{grid-template-columns:210px minmax(0,1fr)}}
+@media(max-width:620px){.management-tabs{padding:9px;gap:3px}.management-tab{padding:9px 12px}.management-toolbar{padding:9px 12px}#terminal-screen{height:340px}.file-layout,.macro-layout{display:block}.file-sidebar,.macro-sidebar{border-right:0;border-bottom:1px solid var(--manage-border)}.file-list{max-height:180px}.macro-list{max-height:180px;overflow:auto}.editor-container,.editor-instance,.editor-instance .cm-editor{min-height:370px}.macro-form{padding:17px}.macro-form-grid{grid-template-columns:1fr}.command-form{padding:10px}.command-form button{padding:9px!important}.editor-toolbar{flex-wrap:wrap}.backup-bar{flex-wrap:wrap}}
